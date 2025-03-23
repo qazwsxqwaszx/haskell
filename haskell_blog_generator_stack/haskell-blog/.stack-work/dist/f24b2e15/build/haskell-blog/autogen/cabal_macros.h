@@ -20,6 +20,16 @@
   (major1) == 4 && (major2) <  19 || \
   (major1) == 4 && (major2) == 19 && (minor) <= 2)
 #endif /* MIN_VERSION_base */
+/* package bytestring-0.12.1.0 */
+#ifndef VERSION_bytestring
+#define VERSION_bytestring "0.12.1.0"
+#endif /* VERSION_bytestring */
+#ifndef MIN_VERSION_bytestring
+#define MIN_VERSION_bytestring(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  12 || \
+  (major1) == 0 && (major2) == 12 && (minor) <= 1)
+#endif /* MIN_VERSION_bytestring */
 /* package http-client-0.7.18 */
 #ifndef VERSION_http_client
 #define VERSION_http_client "0.7.18"
@@ -123,7 +133,7 @@
 #endif /* MIN_TOOL_VERSION_runghc */
 
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "haskell-blog-0.1.0.0-228S2jVPScwDixEKz16Z3P-haskell-blog"
+#define CURRENT_COMPONENT_ID "haskell-blog-0.1.0.0-FwGHFZJfJfbKEJFh3Fjxuo-haskell-blog"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"
