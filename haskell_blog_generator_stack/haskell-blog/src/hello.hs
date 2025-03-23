@@ -73,14 +73,17 @@ doNothing = ()
 -- main :: IO ()
 -- main = do   
 --     writeFile "log.txt" "This is a log entry"
-main :: IO ()
-main = do
-  let linesToWrite = ["[INFO] Start", "[INFO] Writing log", "[INFO] Done"]
-  writeFile "log.txt" (unlines linesToWrite)
-  putStrLn "已寫入 log.txt，現在讀出內容："
-  content <- readFile "log.txt"
-  putStrLn "內容如下："
-  putStrLn content
+-- main :: IO ()
+-- main = do
+--   let linesToWrite = ["[INFO] Start", "[INFO] Writing log", "[INFO] Done"]
+--   writeFile "log.txt" (unlines linesToWrite)
+--   putStrLn "已寫入 log.txt，現在讀出內容："
+--   content <- readFile "log.txt"
+--   putStrLn "內容如下："
+--   putStrLn content
+makeHtml :: String -> String -> String
+makeHtml title body =
+  "<html><head><title>" <> title <> "</title></head><body>" <> body <> "</body></html>"
 
 
 
