@@ -48,9 +48,47 @@
 --     opts = info (strArgument (metavar "NAME") <**> helper)
 --                 ( fullDesc
 --                <> progDesc "Print a greeting for NAME" )
+-- import Test.Tasty
+-- import Test.Tasty.HUnit
+
+-- newtype Html = Html String
+-- newtype Structure = Structure String
+
+
+-- main :: IO ()
+-- main = defaultMain $ testCase "HTML test" (Html "hello" `seq` True @?= True)
+-- main :: IO ()
+-- main = do
+--   -- 測試用
+--   defaultMain $ testCase "HTML test" (Html "hello" `seq` True @?= True)
+
+--   -- 額外輸出 HTML 結果
+--   let doc = Html "Hello from stack run!"
+--   putStrLn (renderHtml doc)
+
 import Test.Tasty
 import Test.Tasty.HUnit
 
+-- 型別定義
+newtype Html = Html String
+newtype Structure = Structure String
+
+-- 組合 HTML 用的函式
+p_ :: String -> Structure
+p_ content = Structure ("<p>" ++ content ++ "</p>")
+
+html_ :: Structure -> Html
+html_ (Structure s) = Html s
+
+-- render Html
+renderHtml :: Html -> String
+renderHtml (Html s) = "<html>" ++ s ++ "</html>"
+
+-- main 程式
 main :: IO ()
-main = defaultMain $ testCase "Basic test" (1 + 1 @?= 2)
+main = do
+  let body = p_ "Hello from stack run!"
+      doc = html_ body
+  putStrLn (renderHtml doc)   -- 印出完整 HTML
+  defaultMain $ testCase "HTML test" (doc `seq` True @?= True)
 
