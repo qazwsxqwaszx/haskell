@@ -47,7 +47,7 @@ getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: 
 
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
 bindir     = "D:\\haskell_project\\haskell_blog_generator_stack\\haskell-blog\\.stack-work\\install\\a06652a5\\bin"
-libdir     = "D:\\haskell_project\\haskell_blog_generator_stack\\haskell-blog\\.stack-work\\install\\a06652a5\\lib\\x86_64-windows-ghc-9.8.4\\haskell-blog-0.1.0.0-HmjtR3FvefeDpV4RbvKa1F-haskell-blog"
+libdir     = "D:\\haskell_project\\haskell_blog_generator_stack\\haskell-blog\\.stack-work\\install\\a06652a5\\lib\\x86_64-windows-ghc-9.8.4\\haskell-blog-0.1.0.0-C6LGrCg4i0n3l5ame1FK4r-haskell-blog"
 dynlibdir  = "D:\\haskell_project\\haskell_blog_generator_stack\\haskell-blog\\.stack-work\\install\\a06652a5\\lib\\x86_64-windows-ghc-9.8.4"
 datadir    = "D:\\haskell_project\\haskell_blog_generator_stack\\haskell-blog\\.stack-work\\install\\a06652a5\\share\\x86_64-windows-ghc-9.8.4\\haskell-blog-0.1.0.0"
 libexecdir = "D:\\haskell_project\\haskell_blog_generator_stack\\haskell-blog\\.stack-work\\install\\a06652a5\\libexec\\x86_64-windows-ghc-9.8.4\\haskell-blog-0.1.0.0"

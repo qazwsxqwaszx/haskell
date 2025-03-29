@@ -1,8 +1,10 @@
-D:\haskell_project\haskell_blog_generator_stack\haskell-blog\CHANGELOG.md:
-  hash: d88adef1825fac87888ae2f224d76c427a5c74e159926accdf5b8f11ef3cdcda
-D:\haskell_project\haskell_blog_generator_stack\haskell-blog\README.md:
-  hash: 035b4148d8b5ab0a32063125f7dbec49deef7f57dc180d28c3346fbd4ca73dda
 D:\haskell_project\haskell_blog_generator_stack\haskell-blog\haskell-blog.cabal:
-  hash: 8318606d68ed4d164a187b1d2045e6115a20e15da3716581b9e9d46d1e6ed900
+  hash: 2235d7059885e9cd6ee96de15a1eae5a49c06b74b58b19e4fa4d3a55cf590251
+D:\haskell_project\haskell_blog_generator_stack\haskell-blog\src\Html.hs:
+  hash: 0b81e8dabf11159f6dcd6ce26d43e97ce6d452f1a7e745e25b52ca257f5c87d4
 D:\haskell_project\haskell_blog_generator_stack\haskell-blog\src\Main.hs:
-  hash: 889ea03df27b060023726d2a36199351635650651edfa5f7b1c1d8aaff958b5c
+  hash: 21b61ceaba19e538245624d2100a04db24c39d2984a1d378f3e5be95329cb8a6
+D:\haskell_project\haskell_blog_generator_stack\haskell-blog\src\Markdown.hs:
+  hash: dea7852ff0ab2bb675c6f1a01618717c1d4157ae9e006db67ecc396dec608551
+D:\haskell_project\haskell_blog_generator_stack\haskell-blog\src\Markup.hs:
+  hash: 7fdae9334736ffa61a3f7b3b5b6004a41445a585640679fd481833316e5d21e9

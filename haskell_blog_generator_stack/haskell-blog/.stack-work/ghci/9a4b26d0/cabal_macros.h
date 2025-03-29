@@ -130,16 +130,6 @@
   (major1) == 0 && (major2) <  18 || \
   (major1) == 0 && (major2) == 18 && (minor) <= 1)
 #endif /* MIN_VERSION_optparse_applicative */
-/* package req-3.13.4 */
-#ifndef VERSION_req
-#define VERSION_req "3.13.4"
-#endif /* VERSION_req */
-#ifndef MIN_VERSION_req
-#define MIN_VERSION_req(major1,major2,minor) (\
-  (major1) <  3 || \
-  (major1) == 3 && (major2) <  13 || \
-  (major1) == 3 && (major2) == 13 && (minor) <= 4)
-#endif /* MIN_VERSION_req */
 /* package stm-2.5.3.1 */
 #ifndef VERSION_stm
 #define VERSION_stm "2.5.3.1"
@@ -283,8 +273,11 @@
 #endif /* MIN_TOOL_VERSION_runghc */
 
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "haskell-blog-0.1.0.0-C6LGrCg4i0n3l5ame1FK4r-haskell-blog"
+#define CURRENT_COMPONENT_ID "haskell-blog-0.1.0.0-8Tt13jP6Z20CTRCWi2DWvE-haskell-blog"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"
 #endif /* CURRENT_PACKAGE_VERSION */
+
+#undef CURRENT_PACKAGE_KEY
+#undef CURRENT_COMPONENT_ID
