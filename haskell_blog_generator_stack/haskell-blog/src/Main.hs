@@ -271,13 +271,87 @@
 --   let body = responseBody r
 --   liftIO $ print (body :: Value)  -- 若需要可在這裡指定型別
 
+-- module Main where
+
+-- import Markdown
+-- import Markup
+
+-- main :: IO ()
+-- main = do
+--   content <- readFile "example.md"
+--   let doc = parseMarkdown content
+--   mapM_ print doc
+-- module Main where
+
+-- -- 定義 Person 資料型別
+-- data Person = Person
+--   { name :: String
+--   , age  :: Int
+--   } deriving (Show)
+
+-- main :: IO ()
+-- main = do
+--   let person1 = Person "Gil" 32
+
+--   -- 印出整個資料
+--   print person1
+
+--   -- 印出欄位
+--   putStrLn $ "Name: " ++ name person1
+--   putStrLn $ "Age: "  ++ show (age person1)
+
+--   -- 修改欄位（產生新值）
+--   let person2 = person1 { age = 33 }
+--   print person2
+
+-- Main.hs
+-- module Main where
+
+-- -- 定義一個泛型資料型別 Tuple
+-- data Tuple a b = Tuple a b deriving (Show)
+
+-- -- 自訂函式：交換 Tuple 中的元素
+-- swap :: Tuple a b -> Tuple b a
+-- swap (Tuple x y) = Tuple y x
+
+-- main :: IO ()
+-- main = do
+--   -- 建立一個 Tuple 值
+--   let t1 = Tuple "Clicked" True
+
+--   -- 印出原始 Tuple
+--   putStrLn "Original Tuple:"
+--   print t1
+
+--   -- 呼叫 swap 函式
+--   let t2 = swap t1
+
+--   -- 印出交換後的 Tuple
+--   putStrLn "Swapped Tuple:"
+--   print t2
 module Main where
 
-import Markdown
-import Markup
+-- 定義一個泛型資料型別 Tuple
+data Tuple a b = Tuple a b deriving (Show)
+
+-- 自訂一個會回傳 Either 的函式（除法，如果除以 0 就報錯）
+safeDiv :: Int -> Int -> Either String Int
+safeDiv _ 0 = Left "除以零錯誤！"
+safeDiv x y = Right (x `div` y)
 
 main :: IO ()
 main = do
-  content <- readFile "example.md"
-  let doc = parseMarkdown content
-  mapM_ print doc
+  -- 建立一個 Tuple 值
+  let t = Tuple 10 0
+
+  putStrLn "原始資料："
+  print t
+
+  -- 嘗試安全除法
+  let result = case t of
+        Tuple a b -> safeDiv a b
+
+  putStrLn "除法結果："
+  case result of
+    Left err -> putStrLn $ "錯誤：" ++ err
+    Right val -> putStrLn $ "成功：" ++ show val
