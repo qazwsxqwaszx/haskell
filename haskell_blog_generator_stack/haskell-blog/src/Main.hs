@@ -329,29 +329,162 @@
 --   -- 印出交換後的 Tuple
 --   putStrLn "Swapped Tuple:"
 --   print t2
+-- module Main where
+
+
+
+
+-- main :: IO ()
+-- main = do
+-- module Main where
+
+-- -- 自訂一個布林型別
+-- data MyBool = MyTrue | MyFalse
+
+-- -- 為 MyBool 定義 Show 實例
+-- instance Show MyBool where
+--   show x =
+--     case x of
+--       MyTrue  -> "True"
+--       MyFalse -> "False"
+
+-- main :: IO ()
+-- main = do
+--   let a = MyTrue
+--   let b = MyFalse
+--   putStrLn (show a)
+--   putStrLn (show b)
+
+-- {-# LANGUAGE DeriveGeneric #-}
+
+-- module Main where
+
+-- import GHC.Generics (Generic)
+-- import Data.Semigroup (Semigroup(..))
+
+-- -- 自訂錯誤訊息容器
+-- newtype ValidationErrors = VE [String]
+--   deriving Show
+
+-- -- 實作 Semigroup：讓錯誤訊息可以合併
+-- instance Semigroup ValidationErrors where
+--   (VE e1) <> (VE e2) = VE (e1 ++ e2)
+
+-- -- 驗證函數：檢查名字是否為空
+-- validateName :: String -> Either ValidationErrors String
+-- validateName name =
+--   if null name
+--     then Left (VE ["Name is required"])
+--     else Right name
+
+-- -- 驗證函數：檢查年齡是否為正整數
+-- validateAge :: Int -> Either ValidationErrors Int
+-- validateAge age =
+--   if age <= 0
+--     then Left (VE ["Age must be greater than 0"])
+--     else Right age
+
+-- -- 合併兩個 Either 結果：錯誤時合併錯誤，正確時取其中一個
+-- combineE :: Either ValidationErrors a -> Either ValidationErrors a -> Either ValidationErrors a
+-- combineE (Left e1) (Left e2) = Left (e1 <> e2)
+-- combineE (Left e) _ = Left e
+-- combineE _ (Left e) = Left e
+-- combineE (Right _) (Right x) = Right x
+
+-- -- 主程式
+-- main :: IO ()
+-- main = do
+--   let nameInput = ""      -- 錯誤：空字串
+--   let ageInput = (-3)     -- 錯誤：小於等於 0
+
+--   let result = combineE (validateName nameInput) (validateAge ageInput)
+
+--   case result of
+--     Right _ -> putStrLn "Validation succeeded!"
+--     Left (VE errs) -> do
+--       putStrLn "Validation failed with the following errors:"
+--       mapM_ putStrLn errs
+-- {-# LANGUAGE DeriveGeneric #-}
+
+-- module Main where
+
+-- import GHC.Generics (Generic)
+-- import Data.Semigroup (Semigroup(..))
+
+-- -- 自訂錯誤訊息容器
+-- newtype ValidationErrors = VE [String]
+--   deriving Show
+
+-- -- 實作 Semigroup：讓錯誤訊息可以合併
+-- instance Semigroup ValidationErrors where
+--   (VE e1) <> (VE e2) = VE (e1 ++ e2)
+
+-- -- 驗證函數：檢查名字是否為空
+-- validateName :: String -> Either ValidationErrors ()
+-- validateName name =
+--   if null name
+--     then Left (VE ["Name is required"])
+--     else Right ()
+
+-- -- 驗證函數：檢查年齡是否為正整數
+-- validateAge :: Int -> Either ValidationErrors ()
+-- validateAge age =
+--   if age <= 0
+--     then Left (VE ["Age must be greater than 0"])
+--     else Right ()
+
+-- -- 驗證函數：檢查 Email 格式（是否含有 @）
+-- validateEmail :: String -> Either ValidationErrors ()
+-- validateEmail email =
+--   if '@' `elem` email
+--     then Right ()
+--     else Left (VE ["Email format is invalid"])
+
+-- -- 合併多個驗證錯誤：只收集錯誤，不管成功值
+-- mergeErrors :: [Either ValidationErrors ()] -> Either ValidationErrors ()
+-- mergeErrors = foldr combine (Right ())
+--   where
+--     combine (Left e1) (Left e2) = Left (e1 <> e2)
+--     combine (Left e) _ = Left e
+--     combine _ (Left e) = Left e
+--     combine _ _ = Right ()
+
+-- -- 主程式
+-- main :: IO ()
+-- main = do
+--   let nameInput =  ""          -- 錯誤：名字空白
+--   let ageInput = (-3)          -- 錯誤：年齡小於等於 0
+--   let emailInput = "invalid"   -- 錯誤：沒有 @
+
+--   let result = mergeErrors
+--         [ validateName nameInput
+--         , validateAge ageInput
+--         , validateEmail emailInput
+--         ]
+
+--   case result of
+--     Right _ -> putStrLn "Validation succeeded!"
+--     Left (VE errs) -> do
+--       putStrLn "Validation failed with the following errors:"
+--       mapM_ putStrLn errs
 module Main where
 
--- 定義一個泛型資料型別 Tuple
-data Tuple a b = Tuple a b deriving (Show)
+-- 自訂一個簡單的 log 型別
+newtype LogMessage = Log String
+  deriving Show
 
--- 自訂一個會回傳 Either 的函式（除法，如果除以 0 就報錯）
-safeDiv :: Int -> Int -> Either String Int
-safeDiv _ 0 = Left "除以零錯誤！"
-safeDiv x y = Right (x `div` y)
+-- 實作 Semigroup：定義如何合併兩個 LogMessage
+instance Semigroup LogMessage where
+  Log a <> Log b = Log (a ++ "\n" ++ b)
 
+-- 實作 Monoid：定義「空 log」是什麼
+instance Monoid LogMessage where
+  mempty = Log ""  -- 空字串為單位元
+
+-- 測試主程式
 main :: IO ()
 main = do
-  -- 建立一個 Tuple 值
-  let t = Tuple 10 0
-
-  putStrLn "原始資料："
-  print t
-
-  -- 嘗試安全除法
-  let result = case t of
-        Tuple a b -> safeDiv a b
-
-  putStrLn "除法結果："
-  case result of
-    Left err -> putStrLn $ "錯誤：" ++ err
-    Right val -> putStrLn $ "成功：" ++ show val
+  let logs = [Log "啟動系統", Log "載入設定", Log "完成初始化"]
+  let combined = mconcat logs
+  putStrLn " 合併後的日誌："
+  print combined
